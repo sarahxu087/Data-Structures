@@ -10,6 +10,7 @@ return elements in Last In First Out order.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
 """
+'''
 class Stack:
     def __init__(self):
         self.size = 0
@@ -32,35 +33,26 @@ class Stack:
         if not self.is_empty():
             return self.storage.pop()
 
-# Implementation of the Stack ADT using a singly linked list.
-class Stack :
-# Creates an empty stack.
-    def __init__( self ): 
-        self.top = None 
+'''
+
+
+from link_list import Node,LinkedList
+
+class Stack:
+    def __init__(self):
         self.size = 0
-# Returns True if the stack is empty or False otherwise.
-    def isEmpty( self ): 
-        return self.top is None
-# Returns the number of items in the stack.
-    def __len__( self ): 
+        self.storage = LinkedList()
+
+    def __len__(self):
         return self.size
-# Returns the top item on the stack without removing it.
-    def peek( self ):
-        if not self.isEmpty():
-            return self.top.item
-# Removes and returns the top item on the stack.
-    def pop( self ):
-        if not self.isEmpty():
-            node = self.top
-            self.top = self.top.next
+    
+    def push(self,value):
+        self.storage.add_to_end(value)
+        self.size +=1
+
+    def pop(self):
+        if not self.storage.head:
+            return None
+        else:
             self.size -= 1
-            return node.item
-# Pushes an item onto the top of the stack.
-    def push( self, value ) :
-        self.top = StackNode( value, self._top ) 
-        self.size += 1
-# The private storage class for creating stack nodes.
-class StackNode :
-    def __init__( self, item, link ) :
-        self.item = item 
-        self.next = link
+            return self.storage.remove_from_end()
